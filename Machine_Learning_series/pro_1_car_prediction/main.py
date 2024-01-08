@@ -15,7 +15,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 
 # # reading data form csv file
-path = os.path.abspath("Machine_Learning_series/pro_1_car_prediction/car.csv")
+path = os.path.abspath("car.csv")
 data_df = pd.read_csv(path)
 
 
