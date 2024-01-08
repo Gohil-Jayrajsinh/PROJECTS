@@ -143,5 +143,5 @@ except Exception as e:
 # so now exporting our model
 
 # Save the model to a file
-model_filename = 'Machine_Learning_series/pro_1_car_prediction/linear_regression_model.joblib'
-joblib.dump(my_linear_model, model_filename)
+# model_filename = 'Machine_Learning_series/pro_1_car_prediction/linear_regression_model.joblib'
+# joblib.dump(my_linear_model, model_filename)
