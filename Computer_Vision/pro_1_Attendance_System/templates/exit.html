@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Attendance System</title>
+  <style>
+    body {
+      background-color: rgb(54, 54, 54);
+    }
+
+    .main {
+      position: relative;
+      display: flex;
+      padding: 2vw;
+
+    }
+
+    .m_left {
+      width: 45vw;
+      font-size: 2vw;
+      max-height: 75vh;
+      overflow: scroll;
+    }
+
+    .m_left h3{
+      font-size: 2vw;
+    }
+
+
+    .video {
+      width: 45vw;
+      height: auto;
+      /* border: 1px solid rgb(226, 44, 44);  */
+    }
+
+    .table{
+      font-size: 1vw;
+    }
+
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body style="background-color: rgb(54, 54, 54);" >
+
+
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand ms-3 " href="/">Attendance System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto ms-4 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link ms-4" aria-current="page" href="/">Entry_Camera</a>
+          </li>
+          <li class="nav-item ms-4 ">
+            <a class="nav-link active" href="/exit">Exit_Camera</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="main">
+    <div class="m_left ">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Emp name</th>
+            <th scope="col">Exit time</th>
+            <th scope="col">Exit date</th>
+          </tr>
+        </thead>
+        <tbody id="data_container" >
+
+
+          {% comment %} {% for x in emp_data %}
+          <tr>
+            <td>{{ x.name }}</td>
+            <td>{{ x.exit_time }}</td>
+            <td>{{ x.exit_date }}</td>
+          </tr>
+          {% endfor %} {% endcomment %}
+
+
+          
+      <script>
+        function fetchData() {
+            $.ajax({
+                url: "{% url 'live_data' %}",
+                method: 'GET',
+                success: function(response) {
+                    var dataContainer = $('#data_container');
+                    dataContainer.empty();
+                    response.data.forEach(function(item) {
+                        dataContainer.append(
+                          '<tr> <td>' + item.name + '</td><td>' + item.exit_time + '</td><td>' + item.exit_date + '</td></tr>'
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching data:', status, error);
+                }
+            });
+        }
+    
+        // Polling every 1 seconds
+        setInterval(fetchData, 1000);
+    
+        // Initial fetch
+        fetchData();
+    </script>
+    
+
+
+
+        </tbody>
+      </table>
+
+
+    </div>
+    <div class="m_right ms-4"><img src="{% url 'video_exit' %}" class="video"></div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+ 
+</html>
+<!-- {% comment %} <img src="{% url 'video' %}" > {% endcomment %}
+    <img src="{% url 'video_exit' %}" > -->

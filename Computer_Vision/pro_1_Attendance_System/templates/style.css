@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(163, 163, 163);
+}
+
+.main{
+    position: relative;
+    display: flex;
+    padding: 2vw;
+
+}
+
+.m_left{
+    width: 45vw;
+}
+
+
+.video{
+    width: 45vw;
+    height: auto;
+    border: 1px solid rgb(226, 44, 44);
+}
